@@ -1,0 +1,629 @@
+@import "bourbon/bourbon";
+
+@mixin breakpoint($point) {
+  @if $point == papa-bear {
+    @media (min-width: 1150px) { @content; }
+  }
+  @else if $point == mama-bear {
+    @media (min-width: 600px) { @content; }
+  }
+  @else if $point == baby-bear {
+    @media (max-width: 599px)  { @content; }
+  }
+}
+
+/* ---------------------------------------------
+     variables
+--------------------------------------------- */
+$home_color:    #a2450d; 
+$web_color:     #4e033b; 
+$food_color:    #328b0c;
+$wood_color:    #692a04;
+$about_color:   #11386a;
+$secured_color: #555555;
+
+
+/* --------------------------------------------- 
+     reset/setup
+--------------------------------------------- */
+*, *::after, *::before {
+  @include box-sizing( border-box );
+}
+
+/* --------------------------------------------- 
+     main layout
+--------------------------------------------- */
+body{ 
+  padding: 0;
+  margin: 0;
+  font-family: arial; 
+  background: slategrey;
+  @include breakpoint(mama-bear) { padding: 5px 20px; }
+}
+main { 
+  background: white;
+	display: block;
+	padding: 1em;
+  position: relative;
+  top: 40px;
+  @include breakpoint( mama-bear ){
+  	margin: -8px -10px 10px -15px;
+  	border-radius: 3px;
+    border: 3px solid white;
+  }
+  &.home{
+    box-shadow: inset 0 0 8px $home_color;
+    background: tint( $home_color, 90% );
+  }
+  &.web{
+    box-shadow: inset 0 0 8px $web_color;
+    background: tint( $web_color, 90% );
+  } 
+  &.food{
+    box-shadow: inset 0 0 8px $food_color;
+    background: tint( $food_color, 90% );
+  }
+  &.wood{
+    box-shadow: inset 0 0 8px $wood_color;
+    background: tint( $wood_color, 90% ); 
+  }
+  &.about{
+    box-shadow: inset 0 0 8px $about_color;
+    background: tint( $about_color, 90% );
+  }
+  &.secured{
+    box-shadow: inset 0 0 8px $secured_color;
+    background: tint( $secured_color, 90% );
+  }
+}
+
+/* ---------------------------------------------
+     header
+--------------------------------------------- */
+#site-header{
+  color: #444;
+  margin: 0;
+  position: relative;
+  padding: 4px;
+  width: 90%;
+  float: right;
+  padding: 4px 0 18px;
+  border-radius: 6px;
+  z-index: 0;
+  white-space: nowrap;
+  *{
+    display: inline-block;
+    padding: 8px 4px 0;
+    @include breakpoint( mama-bear ){
+      padding: 6px 3px 0;
+    }
+    @include breakpoint( papa-bear ){
+      padding: 0 6px 0 22px;
+    }
+  }
+  &::before{
+    content: ''; // To generate the box 
+    position: absolute;
+    top: 6px; 
+    right: -20px; 
+    bottom: 12px; 
+    left: 0;
+    z-index: -1;
+    border-bottom: none;
+    border-radius: 10px 0 0 10px;
+    box-shadow: 0 2px hsla(0,0%,100%,.5) inset;
+    @include transform( translateZ(0) perspective(40px) rotateX(-2deg) );
+    @include transform-origin( bottom right );
+    background: lightblue;
+  }
+  &::after{
+    content: ' ';
+    display: table;
+    clear: both;
+  }
+  @include breakpoint( papa-bear ){ 
+    width: 50%;
+    *{ 
+      display: block;
+    }
+  }
+  h1{
+    margin: 0;
+    font-family: "Montserrat Subrayada", arial, sans-serif;
+    color: black;
+    text-decoration: none;
+    font-size: 13px;
+    @include breakpoint( mama-bear ){ 
+      font-size: 28px;
+    }
+    @include breakpoint( papa-bear ){ 
+      font-size: 36px;
+    }    
+  }
+  div{
+    font-size: 10px;
+    @include breakpoint( mama-bear ){
+      font-size: 13px;
+    }
+  }
+}
+
+
+/* ---------------------------------------------
+     navigation
+
+     originated from http://lea.verou.me/2013/10/slanted-tabs-with-css-3d-transforms/
+--------------------------------------------- */
+.nav-main {
+  overflow: hidden;
+  position: relative;
+  min-height: 25px;
+  top: 43px;
+  white-space: nowrap;
+  z-index: 1;
+  overflow: visible;
+  &::after { 
+    content: "?"; /* "Three Line Menu Navicon" shows up */
+    position: absolute;
+    top: 1px;
+    right: 10px;
+    z-index: 2;
+    pointer-events: none;
+    color: white;
+    @include breakpoint( mama-bear ){
+      display: none;
+    }
+  }
+  a {
+    display: block;
+    font-family: "Montserrat Subrayada", arial, sans-serif;
+    color: #444;
+    text-decoration: none; 
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    line-height: 23px;
+    padding: 2px 3px 0;
+    background: linear-gradient( #ccc, #999 );
+    font-weight: 400;
+    font-size: 17px;
+    @include breakpoint( mama-bear ){
+      display: inline-block;
+      position: relative;
+      margin: 0 -7px;
+      padding: 1.5em 2em 1em 1em;
+      width: auto;
+      background: none;
+      height: auto;
+      &::before{
+        transition: all .2s linear;
+        border: .1em solid #aaa;
+      }
+      &.home{
+        &:hover::before{
+          background: tint($home_color,40%);
+        }
+        &::before{
+          background: tint($home_color,70%);
+        }
+      }
+      &.web{
+        &:hover::before{
+          background: tint($web_color,40%);
+        }
+        &::before{
+          background: tint($web_color,70%);
+        }
+      }
+      &.food{
+        &:hover::before{
+          background: tint($food_color,40%);
+        }
+        &::before{
+          background: tint($food_color,70%);
+        }
+      }
+      &.wood{
+        &:hover::before{
+          background: tint($wood_color,40%);
+        }
+        &::before{
+          background: tint($wood_color,70%);
+        }
+      } 
+      &.about{
+        &:hover::before{
+          background: tint($about_color,40%);
+        }
+        &::before{
+          background: tint($about_color,70%);
+        }
+      }
+      &.secured{
+        &:hover::before{
+          background: tint($secured_color,40%);
+        }
+        &::before{
+          background: tint($secured_color,70%);
+        }
+      }
+      &::before{
+        content: ''; // To generate the box 
+        position: absolute;
+        top: 0; right: 0; bottom: .5em; left: 0;
+        z-index: -1;
+        border-bottom: none;
+        border-radius: 10px 10px 0 0;
+        box-shadow: 0 2px hsla(0,0%,100%,.5) inset;
+        @include transform( translateZ(0) perspective(5px) rotateX(2deg) );
+        @include transform-origin( bottom left );
+      }
+      &.active{
+        z-index: 2;
+        color: white;
+        text-shadow: 0 0 4px #555;
+        &::before {
+          margin-bottom: -1px;
+          border-top-width: 1px;
+          border-bottom: 0;
+        }
+        &.home::before{
+          background: $home_color;
+        }
+        &.web::before{
+          background: $web_color;
+        }
+        &.food::before{ 
+          background: $food_color;
+        }
+        &.wood::before{
+          background: $wood_color;
+        } 
+        &.about::before{
+          background: $about_color;
+        }
+        &.secured::before{
+          background: $secured_color;
+        }
+      }
+    }
+    &.active {
+      border: 0;
+      z-index: 1; /* Active tab is on top */
+      color: white;
+      @include breakpoint( baby-bear ){
+        &.home{
+          background: $home_color;
+        }
+        &.web{
+          background: $web_color;
+        }
+        &.food{ 
+          background: $food_color;
+        }
+        &.wood{
+          background: $wood_color;
+        } 
+        &.about{
+          background: $about_color;
+        }
+        &.secured{
+          background: $secured_color;
+        }
+      }
+    }    
+  }//a
+  @include breakpoint( baby-bear ){
+    &.open {
+      a {
+        position: relative;
+        display: block;
+      }
+    }
+  }
+} 
+/* --------------------------------------------- 
+     sub navigation
+--------------------------------------------- */
+.nav-sub{
+  display: block;
+  vertical-align: top;
+  width: 140px;
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  bottom: 0;
+  border-top: 1px solid grey;
+  .home &{
+    background: $home_color;
+  }
+  .web &{
+    background: $web_color;
+  }
+  .food &{
+    background: $food_color;
+  }
+  .wood &{
+    background: $wood_color;
+  }
+  .about &{
+    background: $about_color;
+  }
+  .secured &{
+    background: $secured_color;
+  }
+  a{
+    display: block;
+    padding: 8px 0 8px 8px;
+    font-size: .9em;
+    color: #ddd;
+    text-decoration: none;
+    border-bottom: 1px solid grey;
+    @include transition( .2s all linear );
+    &:hover{
+      .home &{
+        background: tint( $home_color, 30% );
+      }
+      .web &{
+        background: tint( $web_color, 30% );
+      }
+      .food &{
+        background: tint( $food_color, 30% );
+      }
+      .wood &{
+        background: tint( $wood_color, 30% );
+      }
+      .about &{
+        background: tint( $about_color, 30% );
+      }
+      .secured &{
+        background: tint( $secured_color, 30% );
+      }
+    }
+  }
+  .nav-sub-pull{
+    display: none;
+  }
+  @include breakpoint( baby-bear ){
+    left: -140px;
+    @include transition( .5s all linear ); 
+    &.open{
+      left: 0;
+    }
+    .nav-sub-pull{
+      display: block;
+      position: absolute;
+      width: 20px;
+      bottom: 0;
+      top: 0; 
+      left: 140px;
+      border: 0;
+      background: black;
+      font-size: 12px;
+      padding: 8px 0 8px 4px;
+    }
+  }
+}
+/* --------------------------------------------- 
+     social media
+--------------------------------------------- */
+.social-media{
+  background: lightgrey;
+  color: black;
+  overflow-x: hidden;
+  header {
+    a{
+      border-bottom: 1px solid darkgrey;
+      padding: 8px 8px 8px 8px;
+      text-decoration: none;
+      display: block;
+      @include transition( .2s all linear );
+      &:hover{
+        background: white;
+      }
+    }
+    img{
+      height: 20px;
+      float: left;
+    }
+    .social-site{
+      font-size: 11px;
+      text-align: center;
+      letter-spacing: .1em;
+      padding: 0;
+      margin: 0 0 3px;
+      text-transform: uppercase;
+    }  
+    .social-username{
+      float: right;
+      font-size: .8em;
+      margin-top: 5px;
+    }
+  }
+  &.social-media-twitter {
+    box-shadow: 0 0 8px 1px #55acee;
+    header a{
+      color: #55acee;
+    }
+  }
+  &.social-media-github{
+    box-shadow: 0 0 8px 1px #4183c4;
+    header a{
+      color: #4183c4;
+    }
+  }
+  .entry{
+    border-bottom: 1px solid black;
+    &:last-of-type{
+      border-bottom: none;
+    }
+    .entry-label{
+      font-size: .9em;
+      color: #555;
+      padding: 0;
+      margin: 3px;
+    }
+    .entry-content{
+      padding: 0 8px 8px; 
+      font-size: .8em;
+      color: #666;
+    }
+    &.entry-more a{
+      display: block;
+      text-align: center;
+      padding: 3px;
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      font-size: .7em;
+      background: grey;
+      text-decoration: none;
+      color: white;
+      &:hover{
+        background: black;
+      }
+    }
+  }
+}
+/* --------------------------------------------- 
+     blog
+--------------------------------------------- */
+.blog{
+  .nav-blog{
+    margin: 20px 0 0;
+    border-top: 2px solid grey;
+    padding: 4px;
+    a{
+      display: table-cell;
+      float: left;
+      width: 33.33%;
+      color: black;
+      font-size: .9em;
+      text-align: center;
+      height: 40px;
+      vertical-align: middle;
+      span{
+        display: block;
+        text-decoration: none;
+        color: #666;
+      }
+    }
+    a:first-child{
+      text-align: right;
+    }
+    a:last-child{
+      text-align: left;
+    }
+  }
+  article{
+    h1{
+      font-family: "Montserrat Subrayada", arial, sans-serif;
+      margin: 0;
+      font-size: 1.5em;
+      .home &{
+        color: $home_color;
+        text-shadow: 2px 2px 3px tint( $home_color, 70% );
+      }
+      .web &{
+        color: $web_color;
+        text-shadow: 2px 2px 3px tint( $web_color, 70% );
+      }
+      .food &{
+        color: $food_color;
+        text-shadow: 2px 2px 3px tint( $food_color, 70% );
+      }
+      .wood &{
+        color: $wood_color;
+        text-shadow: 2px 2px 3px tint( $wood_color, 70% );
+      }
+      .about &{
+        color: $about_color;
+        text-shadow: 2px 2px 3px tint( $about_color, 70% );
+      }
+    }
+    h2{
+      font-size: 18px;
+      padding: 0;
+      margin: 20px 0 0;
+      .home &{
+        color: $home_color;
+      }
+      .web &{
+        color: $web_color;
+      }
+      .food &{
+        color: $food_color;
+      }
+      .wood &{
+        color: $wood_color;
+      }
+      .about &{
+        color: $about_color;
+      }
+    }
+    p{
+      margin: 8px;
+      font-size: .9em;
+      &:first-of-type{
+        margin-top: 15px;
+      }
+    }
+    
+  }
+}
+
+/* --------------------------------------------- 
+     content
+--------------------------------------------- */
+.content{
+  display: block;
+  min-height: 200px;
+  .nav-sub-exists &{
+    margin-left: 130px;
+    @include breakpoint( baby-bear ){
+      margin-left: 20px;
+    }
+  }
+}
+
+/* --------------------------------------------- 
+     grid
+--------------------------------------------- */
+.grid{
+  [class*='col-'] {
+    float: left;
+  }
+  .col-2-3{
+    width: 66.66%;
+  }
+  .col-1-3 {
+    width: 33.33%;
+  }
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  [class*='col-'] {
+    padding-right: 20px;
+  }
+  [class*='col-']:last-child {
+    padding-right: 0;
+  }  
+}
+
+/* --------------------------------------------- 
+     utilities
+--------------------------------------------- */
+.hide{
+  display: none;
+}
+.cf:before,
+.cf:after {
+    content: " ";
+    display: table;
+}
+.cf:after {
+    clear: both;
+}
