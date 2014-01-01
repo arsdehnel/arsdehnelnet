@@ -244,10 +244,6 @@ msgstr ""
 msgid "Display Site Title &amp; Tagline"
 msgstr ""
 
-#: inc/customizer.php:35 inc/featured-content.php:408
-msgid "Featured Content"
-msgstr ""
-
 #: inc/customizer.php:36
 msgid ""
 "Use a <a href=\"%1$s\">tag</a> to feature your posts. If no posts match the "
@@ -294,21 +290,6 @@ msgstr ""
 msgid ""
 "For an in-depth tutorial, and more tips and tricks, visit the <a href=\"%s"
 "\">Twenty Fourteen documentation</a>."
-msgstr ""
-
-#: inc/featured-content.php:409
-msgid ""
-"Use the <a href=\"%1$s\">\"featured\" tag</a> to feature your posts. You can "
-"change this to a tag of your choice; if no posts match the tag, <a href="
-"\"%2$s\">sticky posts</a> will be displayed instead."
-msgstr ""
-
-#: inc/featured-content.php:428
-msgid "Tag Name"
-msgstr ""
-
-#: inc/featured-content.php:433
-msgid "Don&rsquo;t display tag on front end."
 msgstr ""
 
 #: inc/template-tags.php:47

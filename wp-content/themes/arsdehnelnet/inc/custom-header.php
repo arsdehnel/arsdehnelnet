@@ -70,7 +70,6 @@ function twentyfourteen_header_style() {
 	?>
 		.site-title,
 		.site-description {
-			clip: rect(1px 1px 1px 1px); /* IE7 */
 			clip: rect(1px, 1px, 1px, 1px);
 			position: absolute;
 		}

@@ -105,12 +105,6 @@ function twentyfourteen_setup() {
 		'default-color' => 'f5f5f5',
 	) ) );
 
-	// Add support for featured content.
-	add_theme_support( 'featured-content', array(
-		'featured_content_filter' => 'twentyfourteen_get_featured_posts',
-		'max_posts' => 6,
-	) );
-
 	// This theme uses its own gallery styles.
 	add_filter( 'use_default_gallery_style', '__return_false' );
 }
@@ -520,13 +514,3 @@ require get_template_directory() . '/inc/template-tags.php';
 
 // Add Theme Customizer functionality.
 require get_template_directory() . '/inc/customizer.php';
-
-/*
- * Add Featured Content functionality.
- *
- * To overwrite in a plugin, define your own Featured_Content class on or
- * before the 'setup_theme' hook.
- */
-if ( ! class_exists( 'Featured_Content' ) && 'plugins.php' !== $GLOBALS['pagenow'] ) {
-	require get_template_directory() . '/inc/featured-content.php';
-}

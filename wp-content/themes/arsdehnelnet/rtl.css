@@ -357,19 +357,9 @@ td {
  * -----------------------------------------------------------------------------
  */
 
-.featured-content .post-thumbnail img {
-	right: 0;
-	left: auto;
-}
 
 .slider-viewport {
 	direction: ltr;
-}
-
-.slider .featured-content .entry-header {
-	right: 0;
-	left: auto;
-	text-align: right;
 }
 
 .slider-control-paging {
@@ -516,10 +506,6 @@ td {
 		float: left;
 		margin-right: -33.33333333%;
 		margin-left: auto;
-	}
-
-	.grid .featured-content .hentry {
-		float: right;
 	}
 
 	.slider-control-paging {
@@ -723,10 +709,6 @@ td {
 		float: right;
 	}
 
-	.featured-content {
-		padding-right: 182px;
-		padding-left: 0;
-	}
 }
 
 @media screen and (min-width: 1040px) {
@@ -769,8 +751,7 @@ td {
 		margin-right: 222px;
 	}
 
-	.search-box-wrapper,
-	.featured-content {
+	.search-box-wrapper{
 		padding-right: 222px;
 		padding-left: 0;
 	}
