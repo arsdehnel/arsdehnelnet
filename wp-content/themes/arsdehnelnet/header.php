@@ -9,9 +9,6 @@
  * @since Twenty Fourteen 1.0
  */
 ?><!DOCTYPE html>
-<!--[if IE 7]>
-<html class="ie ie7" <?php language_attributes(); ?>>
-<![endif]-->
 <!--[if IE 8]>
 <html class="ie ie8" <?php language_attributes(); ?>>
 <![endif]-->
@@ -51,8 +48,16 @@
 		$items = wp_get_nav_menu_items( 'main', $args );
 		foreach( $items as $item ):
 			$section = strtolower( $item->title );
-			if( $item->title == single_cat_title( '', false ) || array_key_exists( $section, $cat_array ) ):
-				$class = $section.' active';
+			//no category, we're on the homepage
+			if( !is_array( $cat_array ) && $section == 'home' ):
+				$class = $section.' active current';
+			//is this a category homepage?
+			elseif( $item->title == single_cat_title( '', false ) ):
+				$class = $section.' active current';			
+			//there are categories, we're on a post page and this post has been marked in this particular category
+			elseif( is_array( $cat_array ) && array_key_exists( $section, $cat_array ) ):
+				$class = $section.' current';
+			//either doesn't match or there are no categories or something weird
 			else:
 				$class = $section;
 			endif;
