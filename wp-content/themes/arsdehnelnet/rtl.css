@@ -747,10 +747,6 @@ td {
 		margin-left: 29.04761904%;
 	}
 
-	.full-width .site-content {
-		margin-right: 222px;
-	}
-
 	.search-box-wrapper{
 		padding-right: 222px;
 		padding-left: 0;
@@ -762,19 +758,6 @@ td {
 		left: auto;
 	}
 
-	.slider-control-paging {
-		padding-right: 24px;
-		padding-left: 0;
-	}
-
-	.slider-control-paging li {
-		margin: 12px 0 12px 12px;
-	}
-
-	.slider-control-paging a:before {
-		right: 6px;
-		left: auto;
-	}
 }
 
 @media screen and (min-width: 1110px) {

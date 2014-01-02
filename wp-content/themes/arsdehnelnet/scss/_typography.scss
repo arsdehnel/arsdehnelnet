@@ -46,7 +46,6 @@ article h1 {
 	@each $color in $colors {
 	    .category-#{nth($color, 1)} &{
 	        color: nth($color, 2);
-	        text-shadow: 2px 3px 3px tint(nth($color, 2), 40%);
 	    }
 	}
 }
@@ -66,6 +65,6 @@ article p {
   margin: 8px;
   font-size: .9em;
 }
-article p:first-of-type {
+.single article p:first-of-type {
   margin-top: 15px;
 }
