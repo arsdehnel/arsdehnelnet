@@ -3,16 +3,16 @@
   margin: 0;
   position: relative;
   padding: 4px;
-  width: 90%;
+  width: 95%;
   float: right;
   padding: 4px 0 18px;
   border-radius: 6px;
   z-index: 0;
   white-space: nowrap;
-}
-#site-header * {
-  display: inline-block;
-  padding: 8px 4px 0;
+  *{
+	  display: inline-block;
+	  padding: 8px 4px 0;
+  }
 }
 @media (min-width: 600px) {
   #site-header * {
@@ -28,7 +28,10 @@
   content: '';
   position: absolute;
   top: 6px;
-  right: -20px;
+  right: 0;
+  @include breakpoint( mama-bear ){
+	  right: -20px;
+  }
   bottom: 12px;
   left: 0;
   z-index: -1;
@@ -114,57 +117,3 @@
 .site-title a:hover {
 	color: #fff;
 }
-
-/* Search in the header */
-
-.search-toggle {
-	background-color: #24890d;
-	cursor: pointer;
-	float: right;
-	height: 48px;
-	margin-right: 38px;
-	text-align: center;
-	width: 48px;
-}
-
-.search-toggle:hover,
-.search-toggle.active {
-	background-color: #41a62a;
-}
-
-.search-toggle:before {
-	color: #fff;
-	content: "\f400";
-	font-size: 20px;
-	margin-top: 14px;
-}
-
-.search-toggle .screen-reader-text {
-	left: 5px; /* Avoid a horizontal scrollbar when the site has a long menu */
-}
-
-.search-box-wrapper {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing:    border-box;
-	box-sizing:         border-box;
-	position: absolute;
-	top: 48px;
-	right: 0;
-	width: 100%;
-	z-index: 2;
-}
-
-.search-box {
-	background-color: #41a62a;
-	padding: 12px;
-}
-
-.search-box .search-field {
-	background-color: #fff;
-	border: 0;
-	float: right;
-	font-size: 16px;
-	padding: 2px 2px 3px 6px;
-	width: 100%;
-}
-

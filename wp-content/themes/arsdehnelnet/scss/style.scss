@@ -6,7 +6,9 @@
 @import "header";
 @import "nav";
 @import "footer";
-@import "entry";
+@import "posts";
+@import "listings";		//common styles for any page listing posts
+@import "search";		
 @import "archive";
 @import "comments";
 @import "print";
@@ -123,9 +125,6 @@ pre {
 
 pre {
 	border: 1px solid rgba(0, 0, 0, 0.1);
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing:    border-box;
-	box-sizing:         border-box;
 	margin-bottom: 24px;
 	max-width: 100%;
 	overflow: auto;
@@ -430,9 +429,6 @@ img.aligncenter,
 }
 
 .wp-caption-text {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing:    border-box;
-	box-sizing:         border-box;
 	font-size: 12px;
 	font-style: italic;
 	line-height: 1.5;
