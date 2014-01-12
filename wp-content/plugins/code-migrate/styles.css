@@ -1,0 +1,92 @@
+/* -------------------------------------
+   forms
+   ------------------------------------- */
+.form-control{
+	margin: 12px 0;
+}
+.form-control label,
+.form-control .form-input{
+	display: block;
+	float: left;
+}
+.form-control label{
+	width: 90px;
+	line-height: 2.2;
+}
+.form-control .input-medium{
+	width: 250px;
+}
+.form-control .input-large{
+	width: 600px;
+}
+
+.form-actions{
+	position: absolute; 
+	right: 0px; 
+	bottom: 0px; 
+	left: 0px; 
+	text-align: right; 
+	background: none repeat scroll 0% 0% rgb(70, 64, 60); 
+	padding: 6px;
+}
+
+/* -------------------------------------
+   table
+   ------------------------------------- */
+.codemigrate-data{
+	margin: 10px auto 0;
+	min-width: 700px;
+}
+.codemigrate-data.inner{
+	border: 1px solid rgb(70, 64, 60);
+	width: 100%;
+	min-width: 300px;
+	margin: 10px auto;
+}
+.codemigrate-data.outer{
+	box-shadow: 0 0 8px rgb(70, 64, 60);
+}
+.codemigrate-data thead th{
+	padding: 8px;
+	background: rgb(70, 64, 60); 
+	color: white;
+	border-left: 1px dotted white;
+}
+.codemigrate-data thead th:first-of-type{
+	border-left: none;
+}
+.codemigrate-data tbody td{
+	text-align: center;
+	padding: 4px;
+	border-bottom: 1px dotted rgb(70, 64, 60); 
+}
+.codemigrate-data tbody tr:nth-of-type(even) td{
+	background: #ddd;
+}
+.codemigrate-data tbody td.align-left{
+	text-align: left;
+}
+.codemigrate-data.inner thead th,
+.codemigrate-data.inner tbody td{
+	padding: 2px;
+}
+.codemigrate-data tbody td .button{
+	margin: 2px 6px;
+}
+.codemigrate-data tfoot td{
+	padding: 8px;
+	background: rgb(140, 128, 120); 
+	color: white;
+	text-align: right;
+}
+/* -------------------------------------
+   utilities
+   ------------------------------------- */
+.hide{
+	display: none;
+}
+.clearfix::after{
+	content: '';
+	display: table;
+	clear: both;
+}

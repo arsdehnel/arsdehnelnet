@@ -1,0 +1,18 @@
+.listing-header{
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	border-bottom: 1px dotted black;
+}
+.listing-article{
+	margin-top: 20px;
+	margin-left: 20px;
+}
+.listing-article:first-of-type{
+	margin-top: 0;
+}
+.listing-entry-meta{
+	color: #666;
+	float: right;
+	font-size: .8em;
+	font-style: italic;
+}
