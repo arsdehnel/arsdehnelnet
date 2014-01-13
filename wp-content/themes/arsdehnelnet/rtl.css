@@ -537,60 +537,6 @@ td {
 		margin-left: 0;
 	}
 
-	.primary-navigation {
-		float: left;
-		margin: 0 -12px 0 1px;
-	}
-
-	.primary-navigation ul ul {
-		float: right;
-		margin: 0;
-		right: -999em;
-		left: auto;
-	}
-
-	.primary-navigation ul ul ul {
-		right: -999em;
-		left: auto;
-	}
-
-	.primary-navigation ul li:hover > ul,
-	.primary-navigation ul li.focus > ul {
-		right: auto;
-	}
-
-	.primary-navigation ul ul li:hover > ul,
-	.primary-navigation ul ul li.focus > ul {
-		right: 100%;
-		left: auto;
-	}
-
-	.primary-navigation .menu-item-has-children > a,
-	.primary-navigation .page_item_has_children > a {
-		padding-right: 12px;
-		padding-left: 26px;
-	}
-
-	.primary-navigation .menu-item-has-children > a:after,
-	.primary-navigation .page_item_has_children > a:after {
-		right: auto;
-		left: 12px;
-	}
-
-	.primary-navigation li .menu-item-has-children > a,
-	.primary-navigation li .page_item_has_children > a {
-		padding-right: 12px;
-		padding-left: 20px;
-	}
-
-	.primary-navigation .menu-item-has-children li.menu-item-has-children > a:after,
-	.primary-navigation .menu-item-has-children li.page_item_has_children > a:after,
-	.primary-navigation .page_item_has_children li.menu-item-has-children > a:after,
-	.primary-navigation .page_item_has_children li.page_item_has_children > a:after {
-		content: "\f503";
-		right: auto;
-		left: 8px;
-	}
 }
 
 @media screen and (min-width: 810px) {
@@ -681,30 +627,6 @@ td {
 		margin: 0 -100% 0 0;
 	}
 
-	.secondary-navigation ul ul {
-		right: -999em;
-		left: auto;
-	}
-
-	.secondary-navigation ul li:hover > ul,
-	.secondary-navigation ul li.focus > ul {
-		right: 162px;
-		left: auto;
-	}
-
-	.secondary-navigation .menu-item-has-children > a {
-		padding-right: 30px;
-		padding-left: 38px;
-	}
-
-	.secondary-navigation .menu-item-has-children > a:after {
-		border-right-color: #fff;
-		border-left-color: transparent;
-		right: auto;
-		left: 26px;
-		content: "\f503";
-	}
-
 	.footer-sidebar .widget {
 		float: right;
 	}
@@ -751,13 +673,6 @@ td {
 		padding-right: 222px;
 		padding-left: 0;
 	}
-
-	.secondary-navigation ul li:hover > ul,
-	.secondary-navigation ul li.focus > ul {
-		right: 202px;
-		left: auto;
-	}
-
 }
 
 @media screen and (min-width: 1110px) {
