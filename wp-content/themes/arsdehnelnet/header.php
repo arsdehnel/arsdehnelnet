@@ -56,7 +56,7 @@
 				$class = $section.' active current';			
 			//there are categories, we're on a post page and this post has been marked in this particular category
 			elseif( is_array( $cat_array ) && array_key_exists( $section, $cat_array ) ):
-				$class = $section.' current';
+				$class = $section.' active current';
 			//either doesn't match or there are no categories or something weird
 			else:
 				$class = $section;

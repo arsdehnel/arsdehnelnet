@@ -79,7 +79,7 @@
 	    }
 	}
 	@each $color in $colors {
-		.nav-main a.current.#{nth($color, 1)}::before{
+		.nav-main a.active.#{nth($color, 1)}::before{
 			background: nth($color, 2);
 		}
 	}
@@ -97,18 +97,18 @@
     @include transform( translateZ(0) perspective(5px) rotateX(2deg) );
     @include transform-origin( bottom left );
   }
-  .nav-main a.current {
+  .nav-main a.active {
     z-index: 2;
     color: white;
     text-shadow: 0 0 4px #555;
   }
-  .nav-main a.current::before {
+  .nav-main a.active::before {
     margin-bottom: -3px;
     border-top-width: 1px;
     border-bottom: 0;
   }
 }
-.nav-main a.current {
+.nav-main a.active {
   border: 0;
   z-index: 1;
   color: white;
@@ -118,7 +118,7 @@
 		.nav-main a.#{nth($color, 1)}{
 			background: tint( nth($color, 2), 70% );
 		}
-		.nav-main a.current.#{nth($color, 1)}{
+		.nav-main a.active.#{nth($color, 1)}{
 			background: nth($color, 2);
 		}
 	}
@@ -131,7 +131,7 @@
 }
 
 //for the active nav item make the cursor the arrow instead of the pointer
-.nav-main a.current.active{
+.nav-main a.active{
 	cursor: default;
 }
 
