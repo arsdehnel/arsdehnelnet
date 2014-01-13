@@ -16,20 +16,65 @@ define('WP_CACHE', true); // Added by W3 Total Cache
  *
  * @package WordPress
  */
+ 
+// Define Environments - may be a string or array of options for an environment
+$environments = array(
+	'dev'	=> 'dev.',
+	'test'  => 'test.'
+);
 
-// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define('DB_NAME', 'arsdehnelnet');
+// Get Server name
+$server_name = $_SERVER['SERVER_NAME'];
 
-/** MySQL database username */
-define('DB_USER', 'arsdehnelnet');
+//assign the environments
+foreach($environments AS $key => $env){
+	if(stristr($server_name, $env)){
+		define('ENVIRONMENT', $key);
+		break;
+	}
+}
 
-/** MySQL database password */
-define('DB_PASSWORD', '1arsdehnelNET');
+// If no environment is set default to production
+if(!defined('ENVIRONMENT')) define('ENVIRONMENT', 'production');
 
-/** MySQL hostname */
-define('DB_HOST', 'localhost');
+// Define different DB connection details depending on environment
+switch(ENVIRONMENT){
 
+	case 'dev':
+
+		define('DB_NAME', 'arsdehnelnet');
+		define('DB_USER', 'arsdehnelnet');
+		define('DB_PASSWORD', '1arsdehnelNET');
+		define('DB_HOST', 'localhost');
+		define('WP_DEBUG', true);
+
+		define('WP_SITEURL', 'http://bootstrap.local/');
+		define('WP_HOME', 'http://bootstrap.local/');
+
+		break;
+
+	case 'test':
+
+		define('DB_NAME', 'arsdehnel_test');
+		define('DB_USER', 'arsdehnel_test');
+		define('DB_PASSWORD', '3a4d7a2m');
+		define('DB_HOST', 'pdb1.awardspace.com');
+		define('WP_DEBUG', true);
+
+		break;
+
+	case 'production':
+
+		define('DB_NAME', 'arsdehnel_prod');
+		define('DB_USER', 'arsdehnel_prod');
+		define('DB_PASSWORD', '3a4d7a2m');
+		define('DB_HOST', 'pdb1.awardspace.com');
+		define('WP_DEBUG', false);
+
+		break;
+
+}
+ 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
 
@@ -81,7 +126,7 @@ define('WPLANG', '');
  * It is strongly recommended that plugin and theme developers use WP_DEBUG
  * in their development environments.
  */
-define('WP_DEBUG', false);
+//define('WP_DEBUG', false);		//controlled by environment above
 
 /* That's all, stop editing! Happy blogging. */
 
