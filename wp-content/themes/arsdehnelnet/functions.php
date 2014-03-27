@@ -26,6 +26,34 @@ function arsdehnelnet_comments($comment, $args, $depth){
 	</li>
 	<?php
 }
+add_action( 'init', 'create_posttype' );
+function create_posttype() {
+	register_post_type( 'proposal',
+		array(
+			'labels' => array(
+				'name' 			=> __( 'Proposals' ),
+				'singular_name' => __( 'Proposal' ),
+				'add_new_item' 	=> __( 'Create Proposal' ),
+				'edit_item'		=> __( 'Edit Proposal' )
+			),
+			'description'			=> 'Proposals of work to be done',
+			'public' 				=> true,
+			'exclude_from_search'	=> true,
+//			'publicly_queryable'	=> false,
+			'supports'				=> array( 'title', 'editor', 'thumbnail' ),
+//			'has_archive' 			=> false,
+//			'rewrite' 				=> array('slug' => 'proposal'),
+		)
+	);
+	flush_rewrite_rules();
+}
+
+add_filter( 'post_thumbnail_html', 'remove_thumbnail_dimensions', 10, 3 );
+
+function remove_thumbnail_dimensions( $html, $post_id, $post_image_id ) {
+    $html = preg_replace( '/(width|height)=\"\d*\"\s/', "", $html );
+    return $html;
+}
 
 /**
  * Twenty Fourteen functions and definitions
@@ -261,8 +289,8 @@ function twentyfourteen_scripts() {
 	wp_enqueue_style( 'twentyfourteen-style', get_stylesheet_uri(), array( 'genericons' ) );
 
 	// Load the Internet Explorer specific stylesheet.
-	wp_enqueue_style( 'twentyfourteen-ie', get_template_directory_uri() . '/css/ie.css', array( 'twentyfourteen-style', 'genericons' ), '20131205' );
-	wp_style_add_data( 'twentyfourteen-ie', 'conditional', 'lt IE 9' );
+	//wp_enqueue_style( 'twentyfourteen-ie', get_template_directory_uri() . '/css/ie.css', array( 'twentyfourteen-style', 'genericons' ), '20131205' );
+	//wp_style_add_data( 'twentyfourteen-ie', 'conditional', 'lt IE 9' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

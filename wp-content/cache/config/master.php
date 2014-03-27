@@ -725,6 +725,6 @@ return array(
 	),
 	'plugin.license_key' => '',
 	'plugin.type' => '',
-	'wordpress.home' => 'http://dev.arsdehnel.net',
+	'wordpress.home' => 'http://arsdehnel.dev',
 	'pgcache.bad_behavior_path' => '',
 );

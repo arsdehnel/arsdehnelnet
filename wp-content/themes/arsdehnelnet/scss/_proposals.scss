@@ -1,0 +1,72 @@
+.proposal-content{
+	padding-right: 430px;
+	ul{
+		list-style: disc inside none;
+		li{
+			font-size: .9em;
+			margin: .3em 0;
+		}
+	}
+	.proposal-investment{
+	    margin: 0 auto;
+	    padding: 8px;
+	    width: 50%;
+	    min-width: 400px;
+	    box-shadow: 2px 2px 5px #999;
+	    border: 1px solid #ccc;
+	    dt, dd{
+	    	float: left;
+	    	padding: 2px;
+	    	margin: 2px 0;
+	    	font-weight: normal;
+	    	&:nth-of-type(even){
+	    		background: #eee;
+	    	}
+	    	&.proposal-investment-total{
+	    		border-top: 3px double black;
+	    		padding: 4px 2px;
+	    		font-weight: bold;
+	    	}
+	    }
+	    dt{
+	    	width: 65%;
+	    }
+	    dd{
+	    	width: 35%;
+	    	text-align: right;
+	    }
+	    &:after{
+	    	@extend %clearfix;
+	    }
+	}
+}
+.proposal-featured-image{
+	position: absolute;
+	top: 50px;
+	right: 30px;
+	border: 1px solid #555;
+	img{
+	 	margin: 8px;
+		max-width: 400px;
+	}
+}
+.proposal-meta{
+	margin: 0;
+	padding: 0;
+	width: 160px;
+	li{
+		list-style: none;
+		padding: 2px;
+		margin: 0;
+		border-bottom: 1px solid #999;
+		font-size: .9em;
+		color: #666;
+		span{
+			float: right;
+		}
+	}
+}
+
+.type-noaccess .proposal-meta{
+	display: none;
+}

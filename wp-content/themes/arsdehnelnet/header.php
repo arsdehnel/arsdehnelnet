@@ -76,7 +76,7 @@
 		endif;
 	?>
 </nav>
-<main id="main" class="site-main">
+<div id="main" class="main site-main">
 	<?php
 		if( !is_search() ):
 			?>

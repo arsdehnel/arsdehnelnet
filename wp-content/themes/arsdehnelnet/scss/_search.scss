@@ -15,7 +15,7 @@
 	}
 	color: white;
 	@include transition( .1s all linear );
-	&::before{
+	&:before{
 		border: solid #aaa;
 		border-width: 0 0 1px 1px;
 		content: ''; /* To generate the box */
@@ -37,7 +37,7 @@
 	&:hover,
 	&.active{
 		background: tint( $search_color, 40% );
-		&::before{
+		&:before{
 			background: tint( $search_color, 40% );
 		}
 	}

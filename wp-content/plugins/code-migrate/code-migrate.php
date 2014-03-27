@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Akismet
+ * @package CodeMigrate
  */
 /*
 Plugin Name: CodeMigrate

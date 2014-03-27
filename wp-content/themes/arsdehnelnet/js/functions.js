@@ -59,5 +59,7 @@
 			return false;
 		} );
 	} );
+	
+	$('#category-all :checkbox').attr('type','radio')
 
 } )( jQuery );

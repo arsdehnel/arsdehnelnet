@@ -20,7 +20,7 @@
 	    }
 	}
 }
-.entry-header::after{
+.entry-header:after{
 	display: table;
 	content: ' ';
 	clear: both;
@@ -28,7 +28,7 @@
 .entry-content{
 	margin-top: 0;
 	padding-top: 0;
-	color: #777;
+	color: #444;
 }
 .entry-content p{
 	margin-bottom: 10px;
@@ -105,7 +105,6 @@
 		text-decoration: none;
 	}
 }
-
 
 /**
  * 6.4 Entry Content

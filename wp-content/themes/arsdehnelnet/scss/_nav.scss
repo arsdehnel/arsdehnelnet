@@ -26,7 +26,7 @@
   z-index: 1;
   overflow: visible;
 }
-.nav-main::after {
+.nav-main:after {
   content: "\2630";		//three line navicon
   position: absolute;
   top: 1px;
@@ -36,7 +36,7 @@
   color: white;
 }
 @media (min-width: 600px) {
-  .nav-main::after {
+  .nav-main:after {
     display: none;
   }
 }
@@ -66,24 +66,24 @@
 		background: none;
 		height: auto;
 	}
-	.nav-main a::before {
+	.nav-main a:before {
 		transition: all .2s linear;
 		border: .1em solid #aaa;
 	}
 	@each $color in $colors {
-		.nav-main a.#{nth($color, 1)}::before{
+		.nav-main a.#{nth($color, 1)}:before{
 			background: tint( nth($color, 2), 70% );
 		}
-	    .nav-main a.#{nth($color, 1)}:hover::before{
+	    .nav-main a.#{nth($color, 1)}:hover:before{
 	    	background: tint( nth($color, 2), 40% );
 	    }
 	}
 	@each $color in $colors {
-		.nav-main a.active.#{nth($color, 1)}::before{
+		.nav-main a.active.#{nth($color, 1)}:before{
 			background: nth($color, 2);
 		}
 	}
-  .nav-main a::before {
+  .nav-main a:before {
     content: '';
     position: absolute;
     top: 0;
@@ -102,7 +102,7 @@
     color: white;
     text-shadow: 0 0 4px #555;
   }
-  .nav-main a.active::before {
+  .nav-main a.active:before {
     margin-bottom: -3px;
     border-top-width: 1px;
     border-bottom: 0;
