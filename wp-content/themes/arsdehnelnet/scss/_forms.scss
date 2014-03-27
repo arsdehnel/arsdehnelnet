@@ -2,9 +2,6 @@ button,
 input,
 select,
 textarea {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing:    border-box;
-	box-sizing:         border-box;
 	font-size: 100%;
 	margin: 0;
 	max-width: 100%;
@@ -114,10 +111,6 @@ input[type="submit"]:active {
 
 .search-field {
 	width: 100%;
-}
-
-.search-submit {
-	display: none;
 }
 
 /* Placeholder text color -- selectors need to be separate to work. */

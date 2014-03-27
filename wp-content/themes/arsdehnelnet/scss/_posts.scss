@@ -1,0 +1,160 @@
+.entry-title{
+	font-size: 33px;
+	font-weight: 300;
+	line-height: 1.0909090909;
+	text-transform: uppercase;
+	float: left;
+	clear: none;
+	font-size: 24px;
+	margin: 12px;
+	font-family: "Montserrat Subrayada", arial, sans-serif;
+	@each $color in $colors {
+		.category-#{nth($color, 1)} &,
+	    .category-#{nth($color, 1)} & a{
+	        color: nth($color, 2);
+	        text-shadow: 1px 1px 3px tint(nth($color, 2), 60%);
+	        @include transition( color .1s linear );
+	        &:hover{
+		        text-shadow: 1px 1px 3px tint(nth($color, 2), 40%);
+	        }
+	    }
+	}
+}
+.entry-header:after{
+	display: table;
+	content: ' ';
+	clear: both;
+}
+.entry-content{
+	margin-top: 0;
+	padding-top: 0;
+	color: #444;
+}
+.entry-content p{
+	margin-bottom: 10px;
+}
+.entry-meta{
+	@extend .listing-entry-meta;
+	span{
+		display: block;
+		text-align: right;
+	}
+}
+.entry-category{		
+	a{
+		text-decoration: underline;
+		color: inherit;
+	}
+}
+.entry-date{
+	color: #666;
+	float: right;
+	font-size: .8em;
+	font-style: italic;
+}
+.single{
+	.entry-header{
+		//position: absolute;
+		//top: 10px;
+		//left: 10px;
+		//right: 10px;
+		.edit-link{
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+	}
+	.entry-meta {
+		clear: both;
+		color: #767676;
+		font-size: 12px;
+		font-weight: 400;
+		line-height: 1.3333333333;
+		text-transform: uppercase;
+	}
+	.entry-meta .edit-link a,
+	.entry-content .edit-link a {
+		color: $slate_blue;
+		text-decoration: none;
+	}
+	
+	.entry-content .edit-link a:hover {
+		color: #41a62a;
+	}
+	
+	.entry-content .edit-link a:before,
+	.entry-meta .edit-link a:before {
+		content: "\270E";
+	}
+}
+
+.single .byline,
+.group-blog .byline {
+	display: inline;
+}
+
+.entry-content a{
+	@each $color in $colors {
+	    .category-#{nth($color, 1)} &{
+	        color: nth($color, 2);
+	        @include transition( color .1s linear );
+	    }
+	}	
+	text-decoration: underline;
+	&:hover{
+		text-decoration: none;
+	}
+}
+
+/**
+ * 6.4 Entry Content
+ * -----------------------------------------------------------------------------
+ */
+
+.entry-content,
+.entry-summary,
+.page-content {
+	-webkit-hyphens: auto;
+	-moz-hyphens:    auto;
+	-ms-hyphens:     auto;
+	hyphens:         auto;
+	word-wrap: break-word;
+}
+
+.site-content .entry-content,
+.site-content .entry-summary,
+.page-content {
+	padding: 0 10px;
+}
+
+.page .entry-content {
+	padding-top: 0;
+}
+
+.entry-content table,
+.comment-content table {
+	font-size: 14px;
+	line-height: 1.2857142857;
+	margin-bottom: 24px;
+}
+
+.entry-content th,
+.comment-content th {
+	font-weight: 700;
+	padding: 8px;
+	text-transform: uppercase;
+}
+
+.entry-content td,
+.comment-content td {
+	padding: 8px;
+}
+
+.entry-content .edit-link {
+	clear: both;
+	display: block;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 1.3333333333;
+	text-transform: uppercase;
+}

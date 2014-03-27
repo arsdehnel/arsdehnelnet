@@ -1,3 +1,7 @@
+*{
+	@include box-sizing( border-box );
+}
+
 .site {
 	background-color: #fff;
 	max-width: 1260px;
@@ -11,7 +15,7 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: arial;
+  font-family: overlock, arial, sans-serif;
   background: slategrey;
 }
 @media (min-width: 600px) {
@@ -20,10 +24,7 @@ body {
   }
 }
 
-.site-content .entry-content{
-	margin-top: 40px;
-}
-main {
+.main {
 	background: white;
 	display: block;
 	padding: 1em;
@@ -37,7 +38,7 @@ main {
 	}
 }
 @media (min-width: 600px) {
-  main {
+  .main {
     margin: -8px -10px 40px -15px;
     border-radius: 3px;
     border: 3px solid white;
@@ -46,27 +47,27 @@ main {
 
 
 
-.category-home main {
+.category-home .main {
   box-shadow: inset 0 0 8px #a2450d;
   background: #f5ece6;
 }
-.category-web main {
+.category-web .main {
   box-shadow: inset 0 0 8px #4e033b;
   background: #ede5eb;
 }
-.category-food main {
+.category-food .main {
   box-shadow: inset 0 0 8px #328b0c;
   background: #eaf3e6;
 }
-.category-wood main {
+.category-wood .main {
   box-shadow: inset 0 0 8px #692a04;
   background: #f0e9e5;
 }
-.home main {
+.home .main {
   box-shadow: inset 0 0 8px #11386a;
   background: #e7ebf0;
 }
-.secured main {
+.secured .main {
   box-shadow: inset 0 0 8px #555555;
   background: #eeeeee;
 }

@@ -1,4 +1,60 @@
 <?php
+
+function arsdehnelnet_comments($comment, $args, $depth){
+	?>
+	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
+		<div id="comment-<?php comment_ID(); ?>">
+			<div class="comment-author vcard2">
+				<?php echo get_avatar($comment,$size='48',$default='<path_to_url>' ); ?>
+				<?php printf(__('<cite class="fn">%s</cite>'), get_comment_author_link()) ?>
+			</div>
+			<?php if ($comment->comment_approved == '0') : ?>
+				<em><?php _e('Your comment is awaiting moderation.') ?></em>
+				<br />
+	      	<?php endif; ?>
+			<div class="comment-meta">
+				<a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>"><?php printf(__('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a>
+			    <?php edit_comment_link(__('<span class="icon-edit"></span>Edit'),'  ','') ?>
+			</div> 
+			<div class="comment-content">
+				<?php comment_text() ?>
+			</div>
+			<div class="reply">
+				<?php comment_reply_link(array_merge( $args, array('reply_text' => '<span class="icon-reply"></span>reply', 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
+	      	</div>
+		</div>
+	</li>
+	<?php
+}
+add_action( 'init', 'create_posttype' );
+function create_posttype() {
+	register_post_type( 'proposal',
+		array(
+			'labels' => array(
+				'name' 			=> __( 'Proposals' ),
+				'singular_name' => __( 'Proposal' ),
+				'add_new_item' 	=> __( 'Create Proposal' ),
+				'edit_item'		=> __( 'Edit Proposal' )
+			),
+			'description'			=> 'Proposals of work to be done',
+			'public' 				=> true,
+			'exclude_from_search'	=> true,
+//			'publicly_queryable'	=> false,
+			'supports'				=> array( 'title', 'editor', 'thumbnail' ),
+//			'has_archive' 			=> false,
+//			'rewrite' 				=> array('slug' => 'proposal'),
+		)
+	);
+	flush_rewrite_rules();
+}
+
+add_filter( 'post_thumbnail_html', 'remove_thumbnail_dimensions', 10, 3 );
+
+function remove_thumbnail_dimensions( $html, $post_id, $post_image_id ) {
+    $html = preg_replace( '/(width|height)=\"\d*\"\s/', "", $html );
+    return $html;
+}
+
 /**
  * Twenty Fourteen functions and definitions
  *
@@ -233,8 +289,8 @@ function twentyfourteen_scripts() {
 	wp_enqueue_style( 'twentyfourteen-style', get_stylesheet_uri(), array( 'genericons' ) );
 
 	// Load the Internet Explorer specific stylesheet.
-	wp_enqueue_style( 'twentyfourteen-ie', get_template_directory_uri() . '/css/ie.css', array( 'twentyfourteen-style', 'genericons' ), '20131205' );
-	wp_style_add_data( 'twentyfourteen-ie', 'conditional', 'lt IE 9' );
+	//wp_enqueue_style( 'twentyfourteen-ie', get_template_directory_uri() . '/css/ie.css', array( 'twentyfourteen-style', 'genericons' ), '20131205' );
+	//wp_style_add_data( 'twentyfourteen-ie', 'conditional', 'lt IE 9' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -242,10 +298,6 @@ function twentyfourteen_scripts() {
 
 	if ( is_singular() && wp_attachment_is_image() ) {
 		wp_enqueue_script( 'twentyfourteen-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20130402' );
-	}
-
-	if ( is_active_sidebar( 'sidebar-3' ) ) {
-		wp_enqueue_script( 'jquery-masonry' );
 	}
 
 	if ( is_front_page() && 'slider' == get_theme_mod( 'featured_content_layout' ) ) {
@@ -439,7 +491,7 @@ function twentyfourteen_body_classes( $classes ) {
 		$classes[] = 'grid';
 	}
 
-	if( get_the_id() ):
+	if( is_single() && get_the_id() ):
 		$categories = get_the_category( get_the_id() );
 		//print_r( $categories );
 		foreach( $categories as $category ):

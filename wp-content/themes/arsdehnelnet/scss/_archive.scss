@@ -1,10 +1,8 @@
 .archive-header{
-	padding-bottom: 20px;
-	margin-bottom: 20px;
-	border-bottom: 1px dotted black;
+	@extend .listing-header;
 }
 .archive article{
-	margin-top: 20px;
+	@extend .listing-article;
 }
 .archive article:first-of-type{
 	margin-top: 0;
@@ -23,35 +21,27 @@
 	    }
 	}
 }
-.archive article{
-	margin-left: 20px;
-}
 
-.taxonomy-description,
-.author-description {
+.taxonomy-description{
 	color: #767676;
 	font-size: 14px;
 	line-height: 1.2857142857;
 	padding-top: 6px;
 }
 
-.taxonomy-description p,
-.author-description p {
+.taxonomy-description p{
 	margin-bottom: 18px;
 }
 
-.taxonomy-description p:last-child,
-.author-description p:last-child {
+.taxonomy-description p:last-child{
 	margin-bottom: 0;
 }
 
-.taxonomy-description a,
-.author-description a {
+.taxonomy-description a{
 	text-decoration: underline;
 }
 
-.taxonomy-description a:hover,
-.author-description a:hover {
+.taxonomy-description a:hover{
 	text-decoration: none;
 }
 
@@ -62,49 +52,4 @@
 		margin: 24px auto 0;
 		padding-bottom: 24px;
 	}
-}
-
-.archive .entry-meta{
-	float: right;
-	clear: none;
-}
-.entry-title{
-	font-size: 33px;
-	font-weight: 300;
-	line-height: 1.0909090909;
-	text-transform: uppercase;
-	float: left;
-	clear: none;
-	font-size: 24px;
-	font-family: "Montserrat Subrayada", arial, sans-serif;
-	@each $color in $colors {
-	    .category-#{nth($color, 1)} & a{
-	        color: nth($color, 2);
-	        text-shadow: 1px 1px 3px tint(nth($color, 2), 60%);
-	        @include transition( color .1s linear );
-	        &:hover{
-		        text-shadow: 1px 1px 3px tint(nth($color, 2), 40%);
-	        }
-	    }
-	}
-}
-.archive .entry-header::after{
-	display: table;
-	content: ' ';
-	clear: both;
-}
-.archive .entry-content{
-	margin-top: 0;
-	padding-top: 0;
-	color: #777;
-}
-.archive .entry-content p{
-	margin-bottom: 10px;
-}
-
-.archive .entry-date{
-	color: #666;
-	float: right;
-	font-size: .8em;
-	font-style: italic;
 }

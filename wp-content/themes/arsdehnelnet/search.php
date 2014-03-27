@@ -15,7 +15,8 @@ get_header(); ?>
 			<?php if ( have_posts() ) : ?>
 
 			<header class="page-header">
-				<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'twentyfourteen' ), get_search_query() ); ?></h1>
+				<h1 class="page-title">Search Results</h1>
+				<div class="search-terms"><?php echo get_search_query(); ?></div>
 			</header><!-- .page-header -->
 
 				<?php
@@ -27,7 +28,7 @@ get_header(); ?>
 						 * use this in a child theme, then include a file called called content-___.php
 						 * (where ___ is the post format) and that will be used instead.
 						 */
-						get_template_part( 'content', get_post_format() );
+						get_template_part( 'content', 'listing-entry' );
 
 					endwhile;
 					// Previous/next post navigation.
@@ -42,8 +43,13 @@ get_header(); ?>
 
 		</div><!-- #content -->
 	</section><!-- #primary -->
+	<section id="sidebar" class="sidebar sidebar-search">
+		<header class="search-header">
+			<h1>Search again:</h1>
+			<p>Not seeing what you wanted? Try again!</p>
+		</header>
+		<?php get_search_form(); ?>
+	</section>
 
 <?php
-get_sidebar( 'content' );
-get_sidebar();
 get_footer();

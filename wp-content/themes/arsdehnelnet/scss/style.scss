@@ -1,4 +1,5 @@
 @import "bourbon/bourbon";
+@import "fonts";
 @import "main";
 @import "layout";
 @import "forms";
@@ -6,10 +7,19 @@
 @import "header";
 @import "nav";
 @import "footer";
-@import "entry";
+@import "posts";
+@import "listings";		//common styles for any page listing posts
+@import "search";		
 @import "archive";
 @import "comments";
 @import "print";
+@import "proposals";
+
+%clearfix{
+	content: '';
+	display: table;
+	clear: both;
+}
 
 html, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
 	border: 0;
@@ -123,9 +133,6 @@ pre {
 
 pre {
 	border: 1px solid rgba(0, 0, 0, 0.1);
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing:    border-box;
-	box-sizing:         border-box;
 	margin-bottom: 24px;
 	max-width: 100%;
 	overflow: auto;
@@ -430,9 +437,6 @@ img.aligncenter,
 }
 
 .wp-caption-text {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing:    border-box;
-	box-sizing:         border-box;
 	font-size: 12px;
 	font-style: italic;
 	line-height: 1.5;

@@ -1,3 +1,6 @@
+/* ---------------------------------------------
+     mixins
+--------------------------------------------- */
 @mixin breakpoint($point) {
   @if $point == papa-bear {
     @media (min-width: 1150px) { @content; }
@@ -21,5 +24,6 @@ $food_color:    #328b0c;
 $wood_color:    #692a04;
 $about_color:   #11386a;
 $secured_color: #555555;
+$search_color:  #333333;
 
-$colors: home $home_color, dad $dad_color, web $web_color, food $food_color, wood $wood_color, about $about_color, secured $secured-color;
+$colors: home $home_color, dad $dad_color, web $web_color, food $food_color, wood $wood_color, about $about_color, secured $secured_color, search $search_color;

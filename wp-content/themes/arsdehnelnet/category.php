@@ -38,7 +38,7 @@ get_header(); ?>
 					 * (where ___ is the post format) and that will be used instead.
 					 */
 					//get_template_part( 'content', get_post_format() );
-					get_template_part( 'content', 'category-entry' );
+					get_template_part( 'content', 'listing-entry' );
 
 					endwhile;
 					// Previous/next page navigation.
@@ -54,6 +54,4 @@ get_header(); ?>
 	</section><!-- #primary -->
 
 <?php
-//get_sidebar( 'content' );
-//get_sidebar();
 get_footer();

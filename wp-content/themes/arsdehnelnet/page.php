@@ -28,14 +28,13 @@ get_header(); ?>
 					if ( comments_open() || get_comments_number() ) {
 						comments_template();
 					}
+					
 				endwhile;
 			?>
 
 		</div><!-- #content -->
 	</div><!-- #primary -->
-	<?php //get_sidebar( 'content' ); ?>
 </div><!-- #main-content -->
 
 <?php
-//get_sidebar();
 get_footer();

@@ -29,12 +29,12 @@
 	<link href='http://fonts.googleapis.com/css?family=Montserrat+Subrayada:400,700' rel='stylesheet' type='text/css'>
 </head>
 	<?php
-		$categories = get_the_category( get_the_id() );
-		//print_r( $categories );
-		foreach( $categories as $category ):
-			$cat_array[$category->slug] = $category->slug;
-		endforeach;
-		//add_filter( 'body_class', $cat_array );
+		if( is_single() ):
+			$categories = get_the_category( get_the_id() );
+			foreach( $categories as $category ):
+				$cat_array[$category->slug] = $category->slug;
+			endforeach;
+		endif;
 	?>
 
 <body <?php body_class(); ?>>
@@ -49,42 +49,43 @@
 		foreach( $items as $item ):
 			$section = strtolower( $item->title );
 			//no category, we're on the homepage
-			if( !is_array( $cat_array ) && $section == 'home' ):
+			if( is_front_page() && $section == 'home' ):
 				$class = $section.' active current';
 			//is this a category homepage?
 			elseif( $item->title == single_cat_title( '', false ) ):
 				$class = $section.' active current';			
 			//there are categories, we're on a post page and this post has been marked in this particular category
 			elseif( is_array( $cat_array ) && array_key_exists( $section, $cat_array ) ):
-				$class = $section.' current';
+				$class = $section.' active current';
 			//either doesn't match or there are no categories or something weird
 			else:
 				$class = $section;
 			endif;
 			?>
 			<a href="<?php echo $item->url; ?>" class="<?php echo $class;?>" data-section-id="<?php echo $section;?>">
-				<?php echo $item->title; ?>
+				<span class="icon-<?php echo $section;?>"></span><?php echo $item->title; ?>
   			</a>
   			<?php
-			//print_r( $item );
 		endforeach;
+		
+		//set the search class
+		if( is_search() ):
+			$class = ' active current';
+		else:
+			$class = '';
+		endif;
 	?>
 </nav>
-<!--
-	<header id="masthead" class="site-header" role="banner">
-		<div class="header-main">
-
-			<div class="search-toggle">
-				<a href="#search-container" class="screen-reader-text"><?php _e( 'Search', 'twentyfourteen' ); ?></a>
+<div id="main" class="main site-main">
+	<?php
+		if( !is_search() ):
+			?>
+			<div id="search-container" class="search-box-wrapper hide">
+				<div class="search-box">
+					<?php get_search_form(); ?>
+				</div>
 			</div>
-
-		</div>
-
-		<div id="search-container" class="search-box-wrapper hide">
-			<div class="search-box">
-				<?php get_search_form(); ?>
-			</div>
-		</div>
-	</header><!-- #masthead -->
-
-<main id="main" class="site-main">
+			<a href="#search-container" class="search-toggle icon-search search<?php echo $class; ?>"><span class="icon-search"></span>search</a>
+			<?php
+		endif;
+	?>

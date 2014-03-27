@@ -11,7 +11,6 @@
 	.site-content .entry-header,
 	.site-content .entry-content,
 	.site-content .entry-summary,
-	.site-content .entry-meta,
 	.page-content,
 	.page-header,
 	.contributor-info,
@@ -38,9 +37,7 @@
 		display: none;
 	}
 
-	.site-title a,
-	.entry-meta,
-	.entry-meta a {
+	.site-title a,{
 		color: #2b2b2b;
 	}
 
@@ -83,14 +80,6 @@
 
 	.site-content .has-post-thumbnail .entry-header {
 		padding-top: 0;
-	}
-
-	.site-content footer.entry-meta {
-		margin: 24px auto;
-	}
-
-	.entry-meta .tag-links a {
-		color: #fff;
 	}
 
 	.singular .site-content .hentry.has-post-thumbnail {
