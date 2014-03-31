@@ -2,27 +2,12 @@
 
     class postaccesscontroller_ui{
 
-    	public function generate_checkbox_well( $field_name, $options, $current ){
+        /* ---------------------------------------------------------------------------------
+                   FORMS
+           --------------------------------------------------------------------------------- */
 
-    		$return = '';
-
-			foreach( $options as $value => $display_text ):
-				$return .= "<div class='form-input-checkbox-well-item'>";
-
-				if( isset( $current ) && is_array( $current ) && in_array( $value, $current ) ):
-					$checked = ' checked';
-				elseif( isset( $current ) && $current == $value ):
-					$checked = ' checked';
-				else:
-					$checked = '';
-				endif;
-
-				$return .= "<input type='checkbox' name='".$field_name."[]' id='$field_name-$value' value='$value' $checked>";
-				$return .= "<label for='$field_name-$value'>$display_text</label></div>";
-			endforeach;
-
-			return $return;
-
+    	public function generate_checkbox_well( $args ){
+            return $this->_form_input_checkbox_well( $args );
     	}
 
     	public function generate_form_table_line( $field_label, $field_type, $field_args ){
@@ -85,28 +70,32 @@
 
     	}
 
-    	private function _form_input_checkbox_well( $args ){
+        private function _form_input_checkbox_well( $args ){
 
-    		extract( $args );
+            extract( $args );
 
-    		$return = '<div class="postaccesscontroller-checkbox-well">';
+            $return = '<div class="postaccesscontroller-checkbox-well">';
 
-			foreach( $options as $option ):
-				$return .= "<label for='$name-".$option['value']."'>";
-				if( $option['selected'] == 'Y' ):
-					$checked = ' checked';
-				else:
-					$checked = '';
-				endif;
-				$return .= "<input type='checkbox' name='".$name."[]' id='$name-".$option['value']."' value='".$option['value']."' $checked>";
-				$return .= $option['label']."</label>";
-			endforeach;
+            foreach( $options as $option ):
+                $return .= "<label for='$name-".$option['value']."'>";
+                if( $option['selected'] == 'Y' ):
+                    $checked = ' checked';
+                else:
+                    $checked = '';
+                endif;
+                $return .= "<input type='checkbox' name='".$name."[]' id='$name-".$option['value']."' value='".$option['value']."' $checked>";
+                $return .= $option['label']."</label>";
+            endforeach;
 
-			$return .= '</div>';
+            $return .= '</div>';
 
-			return $return;
+            return $return;
 
-    	}
+        }        
+
+        /* ---------------------------------------------------------------------------------
+                   MISC
+           --------------------------------------------------------------------------------- */
 
         public function generate_extra_tablenav( $data ){
             if( is_array( $data ) ){
