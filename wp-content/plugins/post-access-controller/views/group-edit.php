@@ -28,7 +28,7 @@
 			?>
 		</table>
 		<div class="hide">
-			<input type="hidden" name="pac_grp_mstr_id" value="<?php echo $pac['group_master']->pac_grp_mstr_id; ?>" />
+			<input type="hidden" name="post_id" value="<?php echo $pac['group_master']->ID; ?>" />
 		</div>
 		<div class="form-actions">
 			<button type="submit" class="button button-large button-primary">Save</button>

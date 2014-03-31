@@ -1,14 +1,19 @@
 <?php
 /**
- * @package PostAccessController
- */
-/*
-Plugin Name: PostAccessController
-Description: Allow control of access to individual posts by setting individual users or user groups to have access
-Version: 0.1
-Author: arsdehnel
-License: GPLv2 or later
+ * Plugin Name: Post Access Controller
+ * Plugin URI:  http://bueltge.de/wp-addquicktags-de-plugin/120/
+ * Description: Allow control of access to individual posts by setting individual users or user groups to have access
+ * Version:     0.8
+ * Author:      Adam Dehnel
+ * Author URI:  http://arsdehnel.net/
+ * License:     GPLv2 or later
+ * 
+ * 
+ * 
 */
+
+global $postaccesscontroller_statuses;
+$postaccesscontroller_statuses = array('publish'=>'Active','trash'=>'Inactive');
 
 add_action( 'admin_menu'                                , 'admin_menu_setup' );
 add_action( 'the_post'                                  , 'postaccesscontroller_check'        , 10, 1 );
@@ -17,11 +22,12 @@ add_action( 'add_meta_boxes'                            , 'postaccesscontroller_
 add_action( 'wp_ajax_post-access-controller--meta-user' , 'postaccesscontroller_meta_user'    , 10 );
 add_action( 'wp_ajax_post-access-controller--meta-group', 'postaccesscontroller_meta_group'   , 10 );
 add_action( 'save_post'                                 , 'postaccesscontroller_save_postdata' );
-add_action( 'admin_init'                                , 'register_pac_settings' );
+add_action( 'admin_init'                                , 'postaccesscontroller_register_settings' );
 add_action( 'show_user_profile'                         , 'postaccesscontroller_user_settings' );
 add_action( 'edit_user_profile'                         , 'postaccesscontroller_user_settings' );
 add_action( 'personal_options_update'                   , 'postaccesscontroller_save_user_settings' );
 add_action( 'edit_user_profile_update'                  , 'postaccesscontroller_save_user_settings' );
+add_action( 'init'                                      , 'postaccesscontroller_create_posttypes' );
 
 function admin_menu_setup() {
     add_users_page( 'User Group Maintenance', 'User Groups', 'create_users', 'post-access-controller--main', 'postaccesscontroller_init');
@@ -29,6 +35,24 @@ function admin_menu_setup() {
     add_submenu_page( null, 'Group Master Processing', 'Group Master Processing', 'create_users', 'post-access-controller--process', 'postaccesscontroller_process' );
     add_submenu_page( null, 'Group Master Processing', 'Group Master Processing', 'create_users', 'post-access-controller--archive', 'postaccesscontroller_archive' );
     add_options_page( 'Post Access Control', 'Post Access Control', 'edit_plugins', 'post-access-controller--options', 'postaccesscontroller_options' );
+}
+
+function postaccesscontroller_create_posttypes() {
+    register_post_type( 'pstacsctrlr_grp',
+        array(
+            'labels' => array(
+                'name'          => __( 'Access Control Groups' ),
+                'singular_name' => __( 'Access Control Group' ),
+                'add_new_item'  => __( 'Create Access Control Group' ),
+                'edit_item'     => __( 'Edit Access Control Group' )
+            ),
+            'description'           => 'Name of the access control group and an array of users',
+            'public'                => false,
+            'exclude_from_search'   => true,
+            'supports'              => array( 'title' )
+        )
+    );
+    flush_rewrite_rules();
 }
 
 function postaccesscontroller_meta_user(){  
@@ -39,7 +63,7 @@ function postaccesscontroller_meta_group(){
     postaccesscontroller_meta_options(array('type'=>'group'));
 }
 
-function register_pac_settings(){
+function postaccesscontroller_register_settings(){
     register_setting( 'postaccesscontroller-settings-group', 'meta_box_location' );
     register_setting( 'postaccesscontroller-settings-group', 'meta_box_priority' );
     register_setting( 'postaccesscontroller-settings-group', 'post_types' );
@@ -54,29 +78,25 @@ function postaccesscontroller_init(){
 
     $pac_db                     = new postaccesscontroller_db();
     $pac_ui                     = new postaccesscontroller_ui();
-    $data['db_upd_rslt']        = $pac_db->db_check();
 
     $per_page                   = 10;
-    
+
     //header
-    $data['header_text']        = '<h2>Post Access Controller</h2>';
+    $data['header_text']        = 'Post Access Controller';
+    $data['add_new']            = ' <a href="' . get_bloginfo('wpurl') . '/wp-admin/users.php?page=post-access-controller--edit" class="add-new-h2">Add New</a>';
 
     $status_counts              = $pac_db->pac_grp_mstr_sts_cnt_lkup();
-
-    foreach( $status_counts as $status ):
-        $statuses[$status->status_code] = $status->rec_count;
-    endforeach;
 
     $tablenav                   = array(
                                         array( 'label' => 'All'
                                               ,'href'  => get_bloginfo('wpurl') . '/wp-admin/users.php?page=post-access-controller--main'
-                                              ,'count' => $statuses['ALL'] ),
+                                              ,'count' => $status_counts['all'] ),
                                         array( 'label' => 'Active'
                                               ,'href'  => get_bloginfo('wpurl') . '/wp-admin/users.php?page=post-access-controller--main&filters=status_code~A'
-                                              ,'count' => $statuses['A'] ),
+                                              ,'count' => $status_counts['publish'] ),
                                         array( 'label' => 'Archived'
                                               ,'href'  => get_bloginfo('wpurl') . '/wp-admin/users.php?page=post-access-controller--main&filters=status_code~I'
-                                              ,'count' => $statuses['I'] )
+                                              ,'count' => $status_counts['trash'] )
                                   );
     
     //build the list table
@@ -119,27 +139,18 @@ function postaccesscontroller_edit(){
     //external files
     wp_enqueue_style( 'pca-styles', plugins_url().'/post-access-controller/admin-general.css' );
     
-    if( $_GET['pac_grp_mstr_id'] ):
-        $pac_grp_mstr_id = $_GET['pac_grp_mstr_id'];
+    if( $_GET['post_id'] ):
+        $post_id = $_GET['post_id'];
     else:
-        $pac_grp_mstr_id = 0;
+        $post_id = 0;
     endif;
     
     //data
-    $pac['group_master']        = $pac_db->group_master_lkup( array( 'pac_grp_mstr_id'  => $pac_grp_mstr_id
+    $data                       = $pac_db->group_master_lkup( array( 'post_id'  => $post_id
                                                                     ,'include_users'    => 'Y' ) );
 
-    foreach( $pac['group_master']->users as $user ):
-        if( empty( $user->pac_grp_dtl_id ) ):
-            $selected = 'N';
-        else:
-            $selected = 'Y';
-        endif;
-        $well_data[]            = array( 'value'    => $user->ID
-                                        ,'label'    => $user->display_name
-                                        ,'selected' => $selected );
-    endforeach;
-
+    $pac['group_master']        = $data['group_master'];
+    $pac['users']               = $data['users'];
 
     //breadcrumbs
     $pac['breadcrumbs']         = $pac_ui->generate_breadcrumbs(array(
@@ -149,16 +160,16 @@ function postaccesscontroller_edit(){
                                              ,'href'    => null)
                                   ));
 
-    $data['fields'][]           = $pac_ui->generate_form_table_line( 'Group Name', 'TEXT', array( 'current_value' => $pac['group_master']->group_desc
-                                                                                                 ,'name'          => 'group_desc'
+    $data['fields'][]           = $pac_ui->generate_form_table_line( 'Group Name', 'TEXT', array( 'current_value' => $pac['group_master']->post_title
+                                                                                                 ,'name'          => 'post_title'
                                                                                                  ,'class'         => 'input-medium' ) );
-    $data['fields'][]           = $pac_ui->generate_form_table_line( 'Status', 'DROP_DOWN', array( 'current_value' => $pac['group_master']->status_code
-                                                                                                  ,'name'          => 'status_code'
+    $data['fields'][]           = $pac_ui->generate_form_table_line( 'Status', 'DROP_DOWN', array( 'current_value' => $pac['group_master']->post_status
+                                                                                                  ,'name'          => 'post_status'
                                                                                                   ,'class'         => 'input-medium'
-                                                                                                  ,'values'        => array( 'A' => 'Active'
-                                                                                                                            ,'I' => 'Inactive' ) ) );
-    $data['fields'][]           = $pac_ui->generate_form_table_line( 'Members', 'CHECKBOX_WELL', array( 'name'     => 'pac_group_users'
-                                                                                                       ,'options'  => $well_data ) );
+                                                                                                  ,'values'        => array( 'publish' => 'Active'
+                                                                                                                            ,'trash'   => 'Inactive' ) ) );
+    $data['fields'][]           = $pac_ui->generate_form_table_line( 'Members', 'CHECKBOX_WELL', array( 'name'     => 'post_content'
+                                                                                                       ,'options'  => $pac['users'] ) );
         
     //call the view
     include_once plugin_dir_path( __FILE__ ) . 'views/group-edit.php';
@@ -174,26 +185,16 @@ function postaccesscontroller_process(){
     $form_result_data           = $pac_db->pac_group_form_process( $_POST );
     
     if( array_key_exists( 'error', $form_result_data) ):
-        die($form_result_data['error']);
+        echo '<div id="message" class="error"><p>'.$form_result_data['error'].'</p></div>';
     else:
-        
-        $message_text               = '<div id="message" class="updated"><p>'.$form_result_data['mstr_rslt'].'</p><ul>';
-        $message_text              .= '<li><strong>Users added: </strong>'.$form_result_data['dtl_ins_cnt'].'</li>';
-        $message_text              .= '<li><strong>Users updated: </strong>'.$form_result_data['dtl_upd_cnt'].'</li>';
-        $message_text              .= '</ul></div>';
-
-        $_SESSION['message_text']   = $message_text;
-
-        echo $_SESSION['message_text'];
-        
-        ?>
-        <div class="form-control">
-            <a href="<?php get_bloginfo('wpurl'); ?>/wp-admin/users.php?page=post-access-controller--main" class="button button-large button-primary">Back to Group Listing</a>
-        </div>
-        <?php
-        
-        
+        echo '<div id="message" class="updated"><p>'.$form_result_data['result'].'</p></div>';
     endif;
+
+    ?>
+    <div class="form-control">
+        <a href="<?php get_bloginfo('wpurl'); ?>/wp-admin/users.php?page=post-access-controller--main" class="button button-large button-primary">Back to Group Listing</a>
+    </div>
+    <?php
         
 }
 
@@ -206,26 +207,18 @@ function postaccesscontroller_archive(){
     $form_result_data           = $pac_db->pac_group_archive_process( $_GET );
     
     if( array_key_exists( 'error', $form_result_data) ):
-        die($form_result_data['error']);
+        echo '<div id="message" class="error"><p>'.$form_result_data['error'].'</p></div>';
     else:
-        
-        $message_text               = '<div id="message" class="updated"><p>'.$form_result_data['mstr_rslt'].'</p></div>';
-
-        $_SESSION['message_text']   = $message_text;
-
-        echo $_SESSION['message_text'];
-        
-        ?>
-        <div class="form-control">
-            <a href="<?php get_bloginfo('wpurl'); ?>/wp-admin/users.php?page=post-access-controller--main" class="button button-large button-primary">Back to Group Listing</a>
-        </div>
-        <?php
-        
+        echo '<div id="message" class="updated"><p>'.$form_result_data['result'].'</p></div>';
     endif;
+
+    ?>
+    <div class="form-control">
+        <a href="<?php get_bloginfo('wpurl'); ?>/wp-admin/users.php?page=post-access-controller--main" class="button button-large button-primary">Back to Group Listing</a>
+    </div>
+    <?php
         
 }
-
-
 
 function postaccesscontroller_check( $post_obj ){
 
@@ -314,14 +307,18 @@ function postaccesscontroller_meta_options( $data ){
     $pac_db                     = new postaccesscontroller_db();
 
     $data['options']            = $pac_db->meta_options_lkup( $data );
+
+    //print_r( $data['options'] );
     
     if( $data['type'] == 'user' ):
     
-        $data['list_label'] = 'Select Users';
+        $data['list_label']     = 'Select Users';
+        $data['label_field']    = 'display_name';
     
     elseif( $data['type'] == 'group' ):
     
-        $data['list_label'] = 'Select Groups';
+        $data['list_label']     = 'Select Groups';
+        $data['label_field']    = 'post_title';
     
     endif;
 
@@ -449,14 +446,8 @@ function postaccesscontroller_user_settings(){
     endif;
     $data['groups']             = $pac_db->user_groups_lkup(array( 'user_id' => $user_id ) );   
 
-    foreach( $data['groups'] as $group ):
-        $well_data[$group->pac_grp_mstr_id] = $group->group_desc;
-        if( !empty( $group->pac_grp_dtl_id ) ):
-            $existing_dtls[$group->pac_grp_dtl_id] = $group->pac_grp_mstr_id;
-        endif;
-    endforeach;
-
-    $data['group_well']         = $pac_ui->generate_checkbox_well( 'pac_grp_dtls', $well_data, $existing_dtls );
+    $data['group_well']         = $pac_ui->generate_checkbox_well( array( 'name' => 'post_id'
+                                                                         ,'options' => $data['groups'] ) );
    
     //call the view
     require_once plugin_dir_path( __FILE__ ) . 'views/user-profile.php';

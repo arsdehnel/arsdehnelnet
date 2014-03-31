@@ -13,15 +13,15 @@
 						
 			foreach( $options as $option ):
 			
-				echo '<label for="postaccesscontroller_meta_'.$type.'-'.$option->id.'">';
+				echo '<label for="postaccesscontroller_meta_'.$type.'-'.$option->ID.'">';
 				
-					echo '<input type="checkbox" name="postaccesscontroller_meta_'.$type.'[]" id="postaccesscontroller_meta_'.$type.'-'.$option->id.'" value="'.$option->id.'"';
+					echo '<input type="checkbox" name="postaccesscontroller_meta_'.$type.'[]" id="postaccesscontroller_meta_'.$type.'-'.$option->ID.'" value="'.$option->ID.'"';
 				
-					if( is_array( $current ) && in_array( $option->id, $current ) ):
+					if( is_array( $current ) && in_array( $option->ID, $current ) ):
 						echo " checked";
 					endif;
 				
-					echo '>'.$option->label;
+					echo '>'.$option->$label_field;
 					
 				echo '</label>';
 				
