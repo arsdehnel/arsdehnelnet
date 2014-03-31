@@ -26,8 +26,8 @@ function arsdehnelnet_comments($comment, $args, $depth){
 	</li>
 	<?php
 }
-add_action( 'init', 'create_posttype' );
-function create_posttype() {
+add_action( 'init', 'create_posttypes' );
+function create_posttypes() {
 	register_post_type( 'proposal',
 		array(
 			'labels' => array(
@@ -39,10 +39,25 @@ function create_posttype() {
 			'description'			=> 'Proposals of work to be done',
 			'public' 				=> true,
 			'exclude_from_search'	=> true,
-//			'publicly_queryable'	=> false,
 			'supports'				=> array( 'title', 'editor', 'thumbnail' ),
-//			'has_archive' 			=> false,
-//			'rewrite' 				=> array('slug' => 'proposal'),
+			'menu_icon'             => 'dashicons-analytics',
+		)
+	);
+	flush_rewrite_rules();
+	register_post_type( 'plugin',
+		array(
+			'labels' => array(
+				'name' 			=> __( 'Plugin Pages' ),
+				'singular_name' => __( 'Plugin Page' ),
+				'add_new_item' 	=> __( 'Create Plugin Page' ),
+				'edit_item'		=> __( 'Edit Plugin Page' )
+			),
+			'description'			=> 'Pages that will be the reference for the plugin from the WordPress plugin directory.',
+			'public' 				=> true,
+			'exclude_from_search'	=> true,
+			'supports'				=> array( 'title', 'editor', 'category' ),
+			'menu_icon'             => 'dashicons-visibility',
+			'taxonomies'            => array( 'category' ),
 		)
 	);
 	flush_rewrite_rules();
@@ -153,7 +168,7 @@ function twentyfourteen_setup() {
 	 * See http://codex.wordpress.org/Post_Formats
 	 */
 	add_theme_support( 'post-formats', array(
-		'aside', 'image', 'video', 'audio', 'quote', 'link', 'gallery',
+		'plugin_page',
 	) );
 
 	// This theme allows users to set a custom background.
