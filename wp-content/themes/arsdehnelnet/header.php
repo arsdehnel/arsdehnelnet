@@ -24,6 +24,7 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<!--[if lt IE 9]>
 	<script src="<?php echo get_template_directory_uri(); ?>/js/html5.js"></script>
+	<script src="<?php echo get_template_directory_uri(); ?>/js/respond.min.js"></script>
 	<![endif]-->
 	<?php wp_head(); ?>
 	<link href='http://fonts.googleapis.com/css?family=Montserrat+Subrayada:400,700' rel='stylesheet' type='text/css'>
