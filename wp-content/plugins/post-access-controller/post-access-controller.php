@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Post Access Controller
- * Plugin URI:  http://bueltge.de/wp-addquicktags-de-plugin/120/
+ * Plugin URI:  http://arsdehnel.net/plugin/post-access-controller/
  * Description: Allow control of access to individual posts by setting individual users or user groups to have access
  * Version:     0.8
  * Author:      Adam Dehnel
