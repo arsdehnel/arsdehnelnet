@@ -11,6 +11,9 @@
 	    margin: 0 auto;
 	    padding: 8px;
 	    width: 50%;
+	    &.wide{
+	    	width: 75%;
+	    }
 	    min-width: 400px;
 	    box-shadow: 2px 2px 5px #999;
 	    border: 1px solid #ccc;
