@@ -9,11 +9,11 @@ Syntax error: Invalid CSS after "	    &.wide{": expected "}", was "<<<<<<< HEAD"
 37: 	    }
 38: 	    &.wide{
 39: <<<<<<< HEAD
-40: 	    	width: 75%;
-41: =======
-42: 	    	width: 90%;
-43: >>>>>>> dev
-44: 		    dt{
+40: <<<<<<< HEAD
+41: 	    	width: 75%;
+42: =======
+43: 	    	width: 90%;
+44: >>>>>>> dev
 
 Backtrace:
 /Users/arsdehnel/Sites/arsdehnelnet/wp-content/themes/arsdehnelnet/scss/_proposals.scss:39
@@ -94,4 +94,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Invalid CSS after \"	    &.wide{\": expected \"}\", was \"<<<<<<< HEAD\"\A         on line 39 of /Users/arsdehnel/Sites/arsdehnelnet/wp-content/themes/arsdehnelnet/scss/_proposals.scss\A         from line 16 of /Users/arsdehnel/Sites/arsdehnelnet/wp-content/themes/arsdehnelnet/scss/style.scss\A \A 34: 	    dd{\A 35: 	    	width: 35%;\A 36: 	    	text-align: right;\A 37: 	    }\A 38: 	    &.wide{\A 39: <<<<<<< HEAD\A 40: 	    	width: 75%;\A 41: =======\A 42: 	    	width: 90%;\A 43: >>>>>>> dev\A 44: 		    dt{"; }
+  content: "Syntax error: Invalid CSS after \"	    &.wide{\": expected \"}\", was \"<<<<<<< HEAD\"\A         on line 39 of /Users/arsdehnel/Sites/arsdehnelnet/wp-content/themes/arsdehnelnet/scss/_proposals.scss\A         from line 16 of /Users/arsdehnel/Sites/arsdehnelnet/wp-content/themes/arsdehnelnet/scss/style.scss\A \A 34: 	    dd{\A 35: 	    	width: 35%;\A 36: 	    	text-align: right;\A 37: 	    }\A 38: 	    &.wide{\A 39: <<<<<<< HEAD\A 40: <<<<<<< HEAD\A 41: 	    	width: 75%;\A 42: =======\A 43: 	    	width: 90%;\A 44: >>>>>>> dev"; }
