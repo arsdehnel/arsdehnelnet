@@ -38,6 +38,16 @@
 }
 @font-face {
     font-family: 'alegreya-sc';
+    src: url('fonts/alegreyasanssc_bold_macroman/AlegreyaSansSC-Bold-webfont.eot');
+    src: url('fonts/alegreyasanssc_bold_macroman/AlegreyaSansSC-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/alegreyasanssc_bold_macroman/AlegreyaSansSC-Bold-webfont.woff') format('woff'),
+         url('fonts/alegreyasanssc_bold_macroman/AlegreyaSansSC-Bold-webfont.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'alegreya-sc';
     src: url('fonts/alegreyasanssc_extrabold_macroman/AlegreyaSansSC-ExtraBold-webfont.eot');
     src: url('fonts/alegreyasanssc_extrabold_macroman/AlegreyaSansSC-ExtraBold-webfont.eot?#iefix') format('embedded-opentype'),
          url('fonts/alegreyasanssc_extrabold_macroman/AlegreyaSansSC-ExtraBold-webfont.woff') format('woff'),

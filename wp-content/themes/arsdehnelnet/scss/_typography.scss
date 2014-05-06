@@ -13,7 +13,10 @@
 
 article h1 {
 	@extend %heading-base;
-	font-size: 1.6em;
+	font-size: 2em;
+	font-weight: 700;
+	border-top: 1px solid #999;
+	border-bottom: 1px dotted #ccc;
 }
 
 article h2 {
