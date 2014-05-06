@@ -1,3 +1,6 @@
+$header_font: "alegreya-sc", arial, sans-serif;
+$nav_font:  "alegreya-sc", arial, sans-serif;
+
 @import "bourbon/bourbon";
 @import "fonts";
 @import "main";
@@ -9,7 +12,7 @@
 @import "footer";
 @import "posts";
 @import "listings";		//common styles for any page listing posts
-@import "search";		
+@import "search";
 @import "archive";
 @import "comments";
 @import "print";

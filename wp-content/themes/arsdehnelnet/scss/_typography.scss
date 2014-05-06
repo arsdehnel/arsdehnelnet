@@ -2,8 +2,8 @@
 	clear: both;
 	margin: 0;
 	padding: 0;
-	font-weight: 400;
-	font-family: "Montserrat Subrayada", arial, sans-serif;
+	font-weight: 500;
+	font-family: $header_font;
 	@each $color in $colors {
 	    .category-#{nth($color, 1)} &{
 	        color: nth($color, 2);

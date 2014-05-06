@@ -1,13 +1,13 @@
 .entry-title{
 	font-size: 33px;
-	font-weight: 300;
 	line-height: 1.0909090909;
 	text-transform: uppercase;
 	float: left;
 	clear: none;
 	font-size: 24px;
 	margin: 12px;
-	font-family: "Montserrat Subrayada", arial, sans-serif;
+	font-family: $header_font;
+	font-weight: 500;
 	@each $color in $colors {
 		.category-#{nth($color, 1)} &,
 	    .category-#{nth($color, 1)} & a{
@@ -40,7 +40,7 @@
 		text-align: right;
 	}
 }
-.entry-category{		
+.entry-category{
 	a{
 		text-decoration: underline;
 		color: inherit;
@@ -77,11 +77,11 @@
 		color: $slate_blue;
 		text-decoration: none;
 	}
-	
+
 	.entry-content .edit-link a:hover {
 		color: #41a62a;
 	}
-	
+
 	.entry-content .edit-link a:before,
 	.entry-meta .edit-link a:before {
 		content: "\270E";
@@ -99,7 +99,7 @@
 	        color: nth($color, 2);
 	        @include transition( color .1s linear );
 	    }
-	}	
+	}
 	text-decoration: underline;
 	&:hover{
 		text-decoration: none;

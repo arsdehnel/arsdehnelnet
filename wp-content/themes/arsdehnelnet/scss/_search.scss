@@ -1,5 +1,5 @@
 .search-toggle{
-	font-family: "Montserrat Subrayada", arial, sans-serif;
+	font-family: $header_font;
 	position: absolute;
 	display: block;
 	text-decoration: none;
@@ -21,9 +21,9 @@
 		content: ''; /* To generate the box */
 		position: absolute;
 		background: tint( $search_color, 70% );
-		top: 0; 
-		right: 0; 
-		bottom: 0; 
+		top: 0;
+		right: 0;
+		bottom: 0;
 		left: -5px;
 		z-index: -1;
 		transform: skewX(20deg);
@@ -108,7 +108,7 @@
 		margin: 0 -16px -16px;
 		.search-header{
 			h1{
-				font-family: "Montserrat Subrayada", arial, sans-serif;
+				font-family: $header_font;
 				color: white;
 				text-shadow: 2px 2px 3px #999;
 				font-size: 18px;
@@ -133,7 +133,7 @@
 				color: tint( $search_color, 40% );
 			}
 		}
-	}	
+	}
 	@include breakpoint( mama-bear ){
 		#primary,
 		#sidebar{
@@ -163,7 +163,7 @@
 	.page-header{
 		@extend .listing-header;
 		.page-title{
-			font-family: "Montserrat Subrayada", arial, sans-serif;
+			font-family: $header_font;
 			font-size: 32px;
 			font-weight: 900;
 			line-height: 1.5;

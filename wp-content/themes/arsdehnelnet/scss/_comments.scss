@@ -9,24 +9,24 @@
 	}
 	.comment-reply-title,
 	.comments-title {
-		font-family: "Montserrat Subrayada", arial, sans-serif;
+		font-family: $header_font;
 		font-size: 20px;
 		text-transform: uppercase;
 	}
-	
+
 	.comment-form{
 		display: block;
 		@include breakpoint( mama-bear ){
 			margin: 0 48px;
 		}
 	}
-	
+
 	.comment-form input[type="text"],
 	.comment-form input[type="email"],
 	.comment-form input[type="url"] {
 		width: 100%;
 	}
-	
+
 	.comment-list {
 		list-style: none;
 		@include breakpoint( mama-bear ){
@@ -76,11 +76,11 @@
 						margin-right: 2px;
 					}
 				}
-				
+
 			}
 		}
 	}
-	
+
 	.comment-reply-link{
 		font-size: 12px;
 		color: $slate_blue;
@@ -89,7 +89,7 @@
 			margin-right: 2px;
 		}
 	}
-	
+
 	.comment-author {
 		position: relative;
 		.avatar{
@@ -102,7 +102,7 @@
 			width: 36px;
 		}
 	}
-	
+
 	.bypostauthor > article{
 	}
 }

@@ -29,7 +29,6 @@
 	<!--[if lt IE 9]>
 	<script src="<?php echo get_template_directory_uri(); ?>/js/respond.min.js"></script>
 	<![endif]-->
-	<link href='http://fonts.googleapis.com/css?family=Montserrat+Subrayada:400,700' rel='stylesheet' type='text/css'>
 </head>
 	<?php
 		if( is_single() ):
@@ -56,7 +55,7 @@
 				$class = $section.' active current';
 			//is this a category homepage?
 			elseif( $item->title == single_cat_title( '', false ) ):
-				$class = $section.' active current';			
+				$class = $section.' active current';
 			//there are categories, we're on a post page and this post has been marked in this particular category
 			elseif( is_array( $cat_array ) && array_key_exists( $section, $cat_array ) ):
 				$class = $section.' active current';
@@ -70,7 +69,7 @@
   			</a>
   			<?php
 		endforeach;
-		
+
 		//set the search class
 		if( is_search() ):
 			$class = ' active current';

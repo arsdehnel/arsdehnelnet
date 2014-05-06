@@ -42,7 +42,8 @@
 }
 .nav-main a {
   display: block;
-  font-family: "Montserrat Subrayada", arial, sans-serif;
+  font-family: $nav_font;
+  font-weight: 500;
   color: #444;
   text-decoration: none;
   position: absolute;
@@ -53,8 +54,7 @@
   line-height: 23px;
   padding: 2px 3px 0;
   background: linear-gradient(#cccccc, #999999);
-  font-weight: 400;
-  font-size: 17px;
+  font-size: 19px;
 }
 @media (min-width: 600px) {
 	.nav-main a {
